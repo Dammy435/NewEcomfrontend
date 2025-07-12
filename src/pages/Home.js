@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "../utils/axiosInstance";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Home = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get("/products")
+        axios.get("https://mernfullstack-backend-d21l.onrender.com/api/products")
             .then(res => setProducts(res.data))
             .catch(err => console.error(err));
     }, []);

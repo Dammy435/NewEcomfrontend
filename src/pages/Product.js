@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "../utils/axiosInstance";
+import axios from "axios";
 
 const Product = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        axios.get(`/products/${id}`)
+        axios.get(`https://mernfullstack-backend-d21l.onrender.com/api/products/${id}`)
             .then(res => setProduct(res.data))
             .catch(err => console.error(err));
     }, [id]);

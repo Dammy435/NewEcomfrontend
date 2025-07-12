@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "../utils/axiosInstance";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -13,7 +13,7 @@ const Register = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            const res = await axios.post("/users/register", form);
+            const res = await axios.post("https://mernfullstack-backend-d21l.onrender.com/api/users/register", form)
             localStorage.setItem("token", res.data.token);
             navigate("/");
         } catch (err) {
