@@ -6,14 +6,13 @@ const Register = () => {
     const [form, setForm] = useState({ name: "", email: "", password: "" });
     const navigate = useNavigate();
 
-    const handleChange = e => {
+    const handleChange = (e) =>
         setForm({ ...form, [e.target.name]: e.target.value });
-    };
 
-    const handleSubmit = async e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("https://mernfullstack-backend-d21l.onrender.com/api/users/register", form)
+            const res = await axios.post("/users/register", form);
             localStorage.setItem("token", res.data.token);
             navigate("/");
         } catch (err) {
@@ -22,13 +21,43 @@ const Register = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Register</h2>
-            <input name="name" onChange={handleChange} placeholder="Name" required />
-            <input name="email" onChange={handleChange} placeholder="Email" required />
-            <input name="password" type="password" onChange={handleChange} placeholder="Password" required />
-            <button type="submit">Register</button>
-        </form>
+        <div className="flex justify-center items-center h-screen bg-gray-100">
+            <form
+                onSubmit={handleSubmit}
+                className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full max-w-sm"
+            >
+                <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
+                <input
+                    name="name"
+                    onChange={handleChange}
+                    placeholder="Name"
+                    required
+                    className="mb-4 w-full px-3 py-2 border rounded"
+                />
+                <input
+                    name="email"
+                    type="email"
+                    onChange={handleChange}
+                    placeholder="Email"
+                    required
+                    className="mb-4 w-full px-3 py-2 border rounded"
+                />
+                <input
+                    name="password"
+                    type="password"
+                    onChange={handleChange}
+                    placeholder="Password"
+                    required
+                    className="mb-6 w-full px-3 py-2 border rounded"
+                />
+                <button
+                    type="submit"
+                    className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
+                >
+                    Register
+                </button>
+            </form>
+        </div>
     );
 };
 
